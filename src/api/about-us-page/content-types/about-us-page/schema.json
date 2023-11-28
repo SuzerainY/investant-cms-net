@@ -1,0 +1,25 @@
+{
+  "kind": "singleType",
+  "collectionName": "about_us_pages",
+  "info": {
+    "singularName": "about-us-page",
+    "pluralName": "about-us-pages",
+    "displayName": "AboutUsPage"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "HavenDescription": {
+      "type": "richtext",
+      "default": "About Haven...",
+      "required": true
+    },
+    "RyanDescription": {
+      "type": "richtext",
+      "default": "About Ryan...",
+      "required": true
+    }
+  }
+}

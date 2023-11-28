@@ -1,0 +1,51 @@
+{
+  "kind": "collectionType",
+  "collectionName": "blog_posts",
+  "info": {
+    "singularName": "blog-post",
+    "pluralName": "blog-posts",
+    "displayName": "BlogPost"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "BlogPostBody": {
+      "type": "richtext",
+      "required": true
+    },
+    "BlogPostDescription": {
+      "type": "text",
+      "required": true,
+      "default": "An Investant Commentary"
+    },
+    "SLUG": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "SPLASH": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false,
+      "required": true
+    },
+    "Author": {
+      "type": "string",
+      "default": "Investant",
+      "required": true
+    },
+    "PublishDate": {
+      "type": "date",
+      "required": true
+    }
+  }
+}
