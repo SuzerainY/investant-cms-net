@@ -3,14 +3,13 @@
     connection: {
       client: 'postgres',
       connection: {
-        host: env('DATABASE_HOST', 'localhost'),
-        port: env.int('DATABASE_PORT', 5432),
-        database: env('DATABASE_NAME', 'bank'),
-        user: env('DATABASE_USERNAME', 'postgres'),
-        password: env('DATABASE_PASSWORD', '0000'),
-        schema: env('DATABASE_SCHEMA', 'public'), // Not required
+        host: process.env.DATABASE_HOST,
+        port: process.env.DATABASE_PORT, // May need to cast to integer
+        database: process.env.DATABASE_NAME,
+        user: process.env.DATABASE_USERNAME,
+        password: process.env.DATABASE_PASSWORD,
         ssl: {
-          ca: env('DATABASE_CA')
+          ca: process.env.DATABASE_CA,
         },
       },
       debug: false,
