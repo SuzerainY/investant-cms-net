@@ -1,4 +1,4 @@
- // strapi-api/config/database.js
+ // The purpose of this file is to define the postgres database which is used in production. When the app is in development, however, the /config/database.js file is used
  module.exports = ({ env }) => ({
     connection: {
       client: 'postgres',
