@@ -4,7 +4,8 @@
   "info": {
     "singularName": "about-us-page",
     "pluralName": "about-us-pages",
-    "displayName": "AboutUsPage"
+    "displayName": "AboutUsPage",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -20,6 +21,20 @@
       "type": "richtext",
       "default": "About Ryan...",
       "required": true
+    },
+    "HavenProfilePicture": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "RyanProfilePicture": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }
