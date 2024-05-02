@@ -362,6 +362,84 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiAboutUsPageAboutUsPage extends Schema.SingleType {
+  collectionName: 'about_us_pages';
+  info: {
+    singularName: 'about-us-page';
+    pluralName: 'about-us-pages';
+    displayName: 'AboutUsPage';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    HavenDescription: Attribute.RichText &
+      Attribute.Required &
+      Attribute.DefaultTo<'About Haven...'>;
+    RyanDescription: Attribute.RichText &
+      Attribute.Required &
+      Attribute.DefaultTo<'About Ryan...'>;
+    HavenProfilePicture: Attribute.Media & Attribute.Required;
+    RyanProfilePicture: Attribute.Media & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::about-us-page.about-us-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::about-us-page.about-us-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiBlogPostBlogPost extends Schema.CollectionType {
+  collectionName: 'blog_posts';
+  info: {
+    singularName: 'blog-post';
+    pluralName: 'blog-posts';
+    displayName: 'BlogPost';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Title: Attribute.String & Attribute.Required & Attribute.Unique;
+    BlogPostBody: Attribute.RichText & Attribute.Required;
+    BlogPostDescription: Attribute.Text &
+      Attribute.Required &
+      Attribute.DefaultTo<'An Investant Commentary'>;
+    SLUG: Attribute.String & Attribute.Required & Attribute.Unique;
+    SPLASH: Attribute.Media & Attribute.Required;
+    Author: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Investant'>;
+    PublishDate: Attribute.Date & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::blog-post.blog-post',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::blog-post.blog-post',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -587,7 +665,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -616,6 +693,8 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    firstname: Attribute.String;
+    lastname: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -677,84 +756,6 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
-export interface ApiAboutUsPageAboutUsPage extends Schema.SingleType {
-  collectionName: 'about_us_pages';
-  info: {
-    singularName: 'about-us-page';
-    pluralName: 'about-us-pages';
-    displayName: 'AboutUsPage';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    HavenDescription: Attribute.RichText &
-      Attribute.Required &
-      Attribute.DefaultTo<'About Haven...'>;
-    RyanDescription: Attribute.RichText &
-      Attribute.Required &
-      Attribute.DefaultTo<'About Ryan...'>;
-    HavenProfilePicture: Attribute.Media;
-    RyanProfilePicture: Attribute.Media;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::about-us-page.about-us-page',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::about-us-page.about-us-page',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiBlogPostBlogPost extends Schema.CollectionType {
-  collectionName: 'blog_posts';
-  info: {
-    singularName: 'blog-post';
-    pluralName: 'blog-posts';
-    displayName: 'BlogPost';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Title: Attribute.String & Attribute.Required & Attribute.Unique;
-    BlogPostBody: Attribute.RichText & Attribute.Required;
-    BlogPostDescription: Attribute.Text &
-      Attribute.Required &
-      Attribute.DefaultTo<'An Investant Commentary'>;
-    SLUG: Attribute.String & Attribute.Required & Attribute.Unique;
-    SPLASH: Attribute.Media & Attribute.Required;
-    Author: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'Investant'>;
-    PublishDate: Attribute.Date & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::blog-post.blog-post',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::blog-post.blog-post',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -765,14 +766,14 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::about-us-page.about-us-page': ApiAboutUsPageAboutUsPage;
+      'api::blog-post.blog-post': ApiBlogPostBlogPost;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
-      'api::about-us-page.about-us-page': ApiAboutUsPageAboutUsPage;
-      'api::blog-post.blog-post': ApiBlogPostBlogPost;
     }
   }
 }
