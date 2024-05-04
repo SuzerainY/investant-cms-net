@@ -406,6 +406,7 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
     singularName: 'blog-post';
     pluralName: 'blog-posts';
     displayName: 'BlogPost';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -422,6 +423,11 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
       Attribute.Required &
       Attribute.DefaultTo<'Investant'>;
     PublishDate: Attribute.Date & Attribute.Required;
+    BlogPostCategory: Attribute.Relation<
+      'api::blog-post.blog-post',
+      'oneToMany',
+      'api::blog-post-category.blog-post-category'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -433,6 +439,42 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::blog-post.blog-post',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiBlogPostCategoryBlogPostCategory
+  extends Schema.CollectionType {
+  collectionName: 'blog_post_categories';
+  info: {
+    singularName: 'blog-post-category';
+    pluralName: 'blog-post-categories';
+    displayName: 'BlogPostCategory';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    CategoryName: Attribute.String & Attribute.Required;
+    BlogPost: Attribute.Relation<
+      'api::blog-post-category.blog-post-category',
+      'manyToOne',
+      'api::blog-post.blog-post'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::blog-post-category.blog-post-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::blog-post-category.blog-post-category',
       'oneToOne',
       'admin::user'
     > &
@@ -768,6 +810,7 @@ declare module '@strapi/types' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::about-us-page.about-us-page': ApiAboutUsPageAboutUsPage;
       'api::blog-post.blog-post': ApiBlogPostBlogPost;
+      'api::blog-post-category.blog-post-category': ApiBlogPostCategoryBlogPostCategory;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;

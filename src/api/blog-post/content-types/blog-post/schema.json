@@ -4,7 +4,8 @@
   "info": {
     "singularName": "blog-post",
     "pluralName": "blog-posts",
-    "displayName": "BlogPost"
+    "displayName": "BlogPost",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -31,12 +32,12 @@
       "unique": true
     },
     "SPLASH": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
       "multiple": false,
-      "required": true
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "Author": {
       "type": "string",
@@ -46,6 +47,12 @@
     "PublishDate": {
       "type": "date",
       "required": true
+    },
+    "BlogPostCategory": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::blog-post-category.blog-post-category",
+      "mappedBy": "BlogPost"
     }
   }
 }
