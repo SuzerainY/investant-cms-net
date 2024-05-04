@@ -423,9 +423,9 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
       Attribute.Required &
       Attribute.DefaultTo<'Investant'>;
     PublishDate: Attribute.Date & Attribute.Required;
-    BlogPostCategory: Attribute.Relation<
+    blog_post_categories: Attribute.Relation<
       'api::blog-post.blog-post',
-      'oneToMany',
+      'manyToMany',
       'api::blog-post-category.blog-post-category'
     >;
     createdAt: Attribute.DateTime;
@@ -459,9 +459,9 @@ export interface ApiBlogPostCategoryBlogPostCategory
   };
   attributes: {
     CategoryName: Attribute.String & Attribute.Required;
-    BlogPost: Attribute.Relation<
+    BlogPosts: Attribute.Relation<
       'api::blog-post-category.blog-post-category',
-      'manyToOne',
+      'manyToMany',
       'api::blog-post.blog-post'
     >;
     createdAt: Attribute.DateTime;
