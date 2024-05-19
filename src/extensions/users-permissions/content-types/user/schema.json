@@ -70,6 +70,10 @@
     },
     "lastname": {
       "type": "string"
+    },
+    "blogPostSubscription": {
+      "type": "boolean",
+      "default": true
     }
   }
 }

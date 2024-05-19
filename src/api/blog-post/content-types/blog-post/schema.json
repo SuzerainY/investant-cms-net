@@ -53,6 +53,16 @@
       "relation": "manyToMany",
       "target": "api::blog-post-category.blog-post-category",
       "inversedBy": "BlogPosts"
+    },
+    "SendEmailOnPublish": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "EmailSent": {
+      "type": "boolean",
+      "default": false,
+      "private": true
     }
   }
 }

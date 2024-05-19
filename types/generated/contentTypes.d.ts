@@ -428,6 +428,12 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
       'manyToMany',
       'api::blog-post-category.blog-post-category'
     >;
+    SendEmailOnPublish: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    EmailSent: Attribute.Boolean &
+      Attribute.Private &
+      Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -737,6 +743,7 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     >;
     firstname: Attribute.String;
     lastname: Attribute.String;
+    blogPostSubscription: Attribute.Boolean & Attribute.DefaultTo<true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

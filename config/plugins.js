@@ -19,5 +19,17 @@ module.exports = ({ env }) => ({
         jwtSecret: String(process.env.JWT_SECRET),
       },
     },
+    email: {
+      config: {
+        provider: 'sendgrid',
+        providerOptions: {
+          apiKey: process.env.INVESTANT_NET_GMAIL_SENDGRID_API_KEY,
+        },
+        settings: {
+          defaultFrom: 'investant.net@gmail.com',
+          defaultReplyTo: 'investant.net@gmail.com',
+        },
+      },
+    },
     // ...
 });
