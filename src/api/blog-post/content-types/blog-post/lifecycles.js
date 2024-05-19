@@ -39,6 +39,11 @@ module.exports = {
                         blogThreeTitle: blogThree.Title,
                         blogThreeDescription: blogThree.BlogPostDescription,
                         blogThreeURL: `https://investant.net/blog/${blogThree.SLUG}`,
+                        SenderName: "",
+                        SenderAddress: "",
+                        SenderCity: "",
+                        SenderState: "",
+                        SenderZip: "",
                         unsubscribeLink: "https://investant.net", // Unsubscribe form link
                     });
 

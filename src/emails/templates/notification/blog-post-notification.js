@@ -1,4 +1,4 @@
-module.exports = function blogPostNotification({ featureBlogImage, featureBlogTitle, featureBlogAuthor, featureBlogDescription, featureBlogURL, blogTwoImage, blogTwoTitle, blogTwoDescription, blogTwoURL, blogThreeImage, blogThreeTitle, blogThreeDescription, blogThreeURL, unsubscribeLink}) {
+module.exports = function blogPostNotification({ featureBlogImage, featureBlogTitle, featureBlogAuthor, featureBlogDescription, featureBlogURL, blogTwoImage, blogTwoTitle, blogTwoDescription, blogTwoURL, blogThreeImage, blogThreeTitle, blogThreeDescription, blogThreeURL, SenderName, SenderAddress, SenderCity, SenderState, SenderZip, unsubscribeLink}) {
     return `
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
     <html data-editor-version="2" class="sg-campaigns" xmlns="http://www.w3.org/1999/xhtml">
@@ -205,7 +205,7 @@ module.exports = function blogPostNotification({ featureBlogImage, featureBlogTi
       </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="388de75c-2c59-4b7a-bc2f-2ee0a662932e.1" data-mc-module-version="2019-10-22">
         <tbody>
           <tr>
-            <td style="padding:40px 0px 0px 0px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content"><div><div style="font-family: inherit; text-align: center"><span style="color: #3368fa"><strong>${featureBlogAuthor}</strong></span></div><div></div></div></td>
+            <td style="padding:40px 0px 0px 0px; line-height:22px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content"><div><div style="font-family: inherit; text-align: center"><span style="color: #E81CFF"><strong>${featureBlogAuthor}</strong></span></div><div></div></div></td>
           </tr>
         </tbody>
       </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="378efdbc-3f2f-420d-87cb-f28c9e077ca3" data-mc-module-version="2019-10-22">
@@ -239,7 +239,7 @@ module.exports = function blogPostNotification({ featureBlogImage, featureBlogTi
       </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="e2761dc9-d356-4256-b7b0-b7fe782c31fd">
         <tbody>
           <tr>
-            <td style="padding:18px 0px 18px 0px; line-height:40px; text-align:inherit; background-color:#1B0053;" height="100%" valign="top" bgcolor="#1B0053" role="module-content"><div><h1 style="text-align: center"><span style="color: #FFFFFF">More From</span><span style="color: #E81CFF"> investant.net</span></h1><div></div></div></td>
+            <td style="padding:18px 0px 18px 0px; line-height:40px; text-align:inherit; background-color:#1B0053;" height="100%" valign="top" bgcolor="#1B0053" role="module-content"><div><h1 style="text-align: center"><span style="color: #FFFFFF">More From</span><span style="color: #E81CFF"> Investant</span></h1><div></div></div></td>
           </tr>
         </tbody>
       </table><table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" role="module" data-type="columns" style="padding:30px 0px 30px 0px;" bgcolor="#FFFFFF" data-distribution="1,1">
@@ -265,7 +265,7 @@ module.exports = function blogPostNotification({ featureBlogImage, featureBlogTi
       </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="7a5d1820-b856-4811-b0be-332fcc638d21.1" data-mc-module-version="2019-10-22">
         <tbody>
           <tr>
-            <td style="padding:18px 40px 18px 40px; line-height:22px; text-align:inherit; background-color:#dbe2e9;" height="100%" valign="top" bgcolor="#dbe2e9" role="module-content"><div><div style="font-family: inherit; text-align: inherit"><span style="color: #1B0053">${blogTwoDescription}</span></div>
+            <td style="padding:18px 40px 18px 40px; line-height:22px; text-align:inherit; background-color:#FFFFFF;" height="100%" valign="top" bgcolor="#FFFFFF" role="module-content"><div><div style="font-family: inherit; text-align: inherit"><span style="color: #1B0053">${blogTwoDescription}</span></div>
     <div style="font-family: inherit; text-align: inherit"><br></div>
     <a href="${blogTwoURL}" style="font-family: inherit; text-align: inherit"><span style="color: #1B0053"><u>Read More</u></span></a><div></div></div></td>
           </tr>
@@ -293,7 +293,7 @@ module.exports = function blogPostNotification({ featureBlogImage, featureBlogTi
       </table><table class="module" role="module" data-type="text" border="0" cellpadding="0" cellspacing="0" width="100%" style="table-layout: fixed;" data-muid="7a5d1820-b856-4811-b0be-332fcc638d21.1.1" data-mc-module-version="2019-10-22">
         <tbody>
           <tr>
-            <td style="padding:18px 40px 18px 40px; line-height:22px; text-align:inherit; background-color:#dbe2e9;" height="100%" valign="top" bgcolor="#dbe2e9" role="module-content"><div><div style="font-family: inherit; text-align: inherit"><span style="color: #1B0053">${blogThreeDescription}</span></div>
+            <td style="padding:18px 40px 18px 40px; line-height:22px; text-align:inherit; background-color:#FFFFFF;" height="100%" valign="top" bgcolor="#FFFFFF" role="module-content"><div><div style="font-family: inherit; text-align: inherit"><span style="color: #1B0053">${blogThreeDescription}</span></div>
     <div style="font-family: inherit; text-align: inherit"><br></div>
     <a href="${blogThreeURL}" style="font-family: inherit; text-align: inherit"><span style="color: #1B0053"><u>Read More</u></span></a><div></div></div></td>
           </tr>
@@ -304,7 +304,7 @@ module.exports = function blogPostNotification({ featureBlogImage, featureBlogTi
         </table></td>
           </tr>
         </tbody>
-      </table><div data-role="module-unsubscribe" class="module" role="module" data-type="unsubscribe" style="color:#444444; font-size:12px; line-height:20px; padding:16px 16px 16px 16px; text-align:Center;" data-muid="4e838cf3-9892-4a6d-94d6-170e474d21e5"><div class="Unsubscribe--addressLine"><p class="Unsubscribe--senderName" style="font-size:12px; line-height:20px;">{{Sender_Name}}</p><p style="font-size:12px; line-height:20px;"><span class="Unsubscribe--senderAddress">{{Sender_Address}}</span>, <span class="Unsubscribe--senderCity">{{Sender_City}}</span>, <span class="Unsubscribe--senderState">{{Sender_State}}</span> <span class="Unsubscribe--senderZip">{{Sender_Zip}}</span></p></div><p style="font-size:12px; line-height:20px;"><a class="Unsubscribe--unsubscribeLink" href="${unsubscribeLink}" target="_blank" style="">Unsubscribe</a></p></div><table border="0" cellpadding="0" cellspacing="0" class="module" data-role="module-button" data-type="button" role="module" style="table-layout:fixed;" width="100%" data-muid="56b71715-75d6-42ea-aa0b-22118c417029">
+      </table><div data-role="module-unsubscribe" class="module" role="module" data-type="unsubscribe" style="color:#444444; font-size:12px; line-height:20px; padding:16px 16px 16px 16px; text-align:Center;" data-muid="4e838cf3-9892-4a6d-94d6-170e474d21e5"><div class="Unsubscribe--addressLine"><p class="Unsubscribe--senderName" style="font-size:12px; line-height:20px;">${SenderName}</p><p style="font-size:12px; line-height:20px;"><span class="Unsubscribe--senderAddress">${SenderAddress}</span>, <span class="Unsubscribe--senderCity">${SenderCity}</span>, <span class="Unsubscribe--senderState">${SenderState}</span> <span class="Unsubscribe--senderZip">${SenderZip}</span></p></div><p style="font-size:12px; line-height:20px;"><a class="Unsubscribe--unsubscribeLink" href="${unsubscribeLink}" target="_blank" style="">Unsubscribe</a></p></div><table border="0" cellpadding="0" cellspacing="0" class="module" data-role="module-button" data-type="button" role="module" style="table-layout:fixed;" width="100%" data-muid="56b71715-75d6-42ea-aa0b-22118c417029">
           <tbody>
             <tr>
               <td align="center" bgcolor="" class="outer-td" style="padding:0px 0px 20px 0px;">
