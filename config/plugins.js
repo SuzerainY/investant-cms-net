@@ -17,6 +17,9 @@ module.exports = ({ env }) => ({
     'users-permissions': {
       config: {
         jwtSecret: String(process.env.JWT_SECRET),
+        register: {
+          allowedFields: ["firstname", "lastname", "blogPostSubscription"],
+        }
       },
     },
     email: {
