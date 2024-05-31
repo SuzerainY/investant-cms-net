@@ -59,7 +59,7 @@ module.exports = {
 
                     // Update the EmailSent field to true after emails are sent
                     await strapi.entityService.update('api::blog-post.blog-post', result.id, { data: { EmailSent: true } });
-                } catch (error) {console.error(error);}
+                } catch (error) { console.error(error); }
             }
         }
     },
