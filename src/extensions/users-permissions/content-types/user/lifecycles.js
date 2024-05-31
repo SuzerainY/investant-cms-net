@@ -18,6 +18,20 @@ module.exports = {
                 await strapi.plugin('users-permissions').services.user.edit(result.id, { confirmed: false });
             }
 
+            console.log(`Stage 1 Confirmation Token For User: ${result.username} : ${result.confirmationToken}`);
+
+            // Ensure confirmationToken is generated
+            if (!result.confirmationToken) {
+                // You might need to manually create the confirmationToken here
+                result.confirmationToken = strapi.plugins['users-permissions'].services.jwt.issue({ id: result.id });
+                await strapi.query('plugin::users-permissions.user').update({
+                    where: { id: result.id },
+                    data: { confirmationToken: result.confirmationToken }
+                });
+            }
+
+            console.log(`Stage 2 Confirmation Token For User: ${result.username} : ${result.confirmationToken}`);
+
             // Generate the user's email verification link to our front-end 'verify-email' API
             const InvestantURL = process.env.INVESTANT_FRONT_URL;
             const confirmationUrl = `${InvestantURL}/api/verify-email?confirmationToken=${result.confirmationToken}`;
