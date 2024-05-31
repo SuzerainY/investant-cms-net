@@ -243,11 +243,11 @@ module.exports = function newUserEmailVerification({ username, confirmationUrl, 
             <tbody>
                 <tr>
                 <td style="padding:18px 0px 18px 0px; line-height:20px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content"><div>
-                <div style="font-family: inherit; text-align: inherit"><a href="${blogTwoURL}"><span style="font-size: 15px; color: #40c9ff"><strong>${blogTwoTitle}</strong></span></a></div>
+                <div style="font-family: inherit; text-align: inherit"><a href="${blogTwoURL}" style="text-decoration: none;"><span style="font-size: 15px; color: #40c9ff"><strong>${blogTwoTitle}</strong></span></a></div>
                 <div style="font-family: inherit; text-align: inherit"><br></div>
-                <div style="font-family: inherit; text-align: inherit"><a href="${blogTwoURL}"><span style="color: #ffffff; font-size: 15px">${blogTwoDescription}</span></a></div>
+                <div style="font-family: inherit; text-align: inherit"><a href="${blogTwoURL}" style="text-decoration: none;"><span style="color: #ffffff; font-size: 15px">${blogTwoDescription}</span></a></div>
                 <div style="font-family: inherit; text-align: inherit"><br></div>
-                <div style="font-family: inherit; text-align: inherit"><a href="${blogTwoURL}"><span style="color: #ffffff; font-size: 15px; font-family: inherit">${blogTwoDate}</span></a></div><div></div></div></td>
+                <div style="font-family: inherit; text-align: inherit"><a href="${blogTwoURL}" style="text-decoration: none;"><span style="color: #ffffff; font-size: 15px; font-family: inherit">${blogTwoDate}</span></a></div><div></div></div></td>
                 </tr>
             </tbody>
             </table></td>
@@ -294,11 +294,11 @@ module.exports = function newUserEmailVerification({ username, confirmationUrl, 
             <tbody>
                 <tr>
                 <td style="padding:18px 0px 18px 0px; line-height:20px; text-align:inherit;" height="100%" valign="top" bgcolor="" role="module-content"><div>
-                <div style="font-family: inherit; text-align: inherit"><a href="${blogThreeURL}"><span style="font-size: 15px; color: #40c9ff"><strong>${blogThreeTitle}</strong></span></a></div>
+                <div style="font-family: inherit; text-align: inherit"><a href="${blogThreeURL}" style="text-decoration: none;"><span style="font-size: 15px; color: #40c9ff"><strong>${blogThreeTitle}</strong></span></a></div>
                 <div style="font-family: inherit; text-align: inherit"><br></div>
-                <div style="font-family: inherit; text-align: inherit"><a href="${blogThreeURL}"><span style="color: #ffffff; font-size: 15px">${blogThreeDescription}</span></a></div>
+                <div style="font-family: inherit; text-align: inherit"><a href="${blogThreeURL}" style="text-decoration: none;"><span style="color: #ffffff; font-size: 15px">${blogThreeDescription}</span></a></div>
                 <div style="font-family: inherit; text-align: inherit"><br></div>
-                <div style="font-family: inherit; text-align: inherit"><a href="${blogThreeURL}"><span style="color: #ffffff; font-size: 15px; font-family: inherit">${blogThreeDate}</span></a></div><div></div></div></td>
+                <div style="font-family: inherit; text-align: inherit"><a href="${blogThreeURL}" style="text-decoration: none;"><span style="color: #ffffff; font-size: 15px; font-family: inherit">${blogThreeDate}</span></a></div><div></div></div></td>
                 </tr>
             </tbody>
             </table></td>
