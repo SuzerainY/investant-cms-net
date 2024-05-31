@@ -1,8 +1,57 @@
+const newUserEmailVerification = require('../../../../emails/templates/verification/new-user-email-verification.js');
+
+// Return a Date() object as 'February 30, 2023'
+const formatDate = (date) => {
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const year = date.getUTCFullYear();
+    const month = months[date.getUTCMonth()];
+    const day = date.getUTCDate();
+    
+    return `${month} ${day}, ${year}`;
+}
+
 module.exports = {
     async afterCreate({ result }) {
         // If the brand new user was just created as confirmed, then update them back to not confirmed
         if (result.confirmed === true) {
             await strapi.plugin('users-permissions').services.user.edit(result.id, { confirmed: false });
         }
+
+
+        // Generate the user's email verification link to our front-end 'verify-email' API
+        const InvestantURL = process.env.INVESTANT_FRONT_URL;
+        const confirmationUrl = `${InvestantURL}/api/verify-email?confirmationToken=${result.confirmationToken}`;
+
+        // Fetch the two most recent published blog posts for display in the email
+        const recentPosts = await strapi.entityService.findMany('api::blog-post.blog-post', {
+            filters: { publishedAt: { $notNull: true } },
+            sort: { id: 'desc' },
+            limit: 2,
+            populate: ['SPLASH'], // Ensure SPLASH is populated
+        });
+        const blogTwo = recentPosts[0];
+        const blogThree = recentPosts[1];
+
+        const emailHTML = newUserEmailVerification({
+            username: result.username,
+            confirmationUrl: confirmationUrl,
+            blogTwoImage: blogTwo.SPLASH.formats.small.url,
+            blogTwoTitle: blogTwo.Title,
+            blogTwoDescription: blogTwo.BlogPostDescription,
+            blogTwoDate: formatDate(blogTwo.PublishDate),
+            blogTwoURL: `${InvestantURL}/blog/${blogTwo.SLUG}`,
+            blogThreeImage: blogThree.SPLASH.formats.small.url,
+            blogThreeTitle: blogThree.Title,
+            blogThreeDescription: blogThree.BlogPostDescription,
+            blogThreeDate: formatDate(blogThree.PublishDate),
+            blogThreeURL: `${InvestantURL}/blog/${blogThree.SLUG}`,
+            aboutUsURL: `${InvestantURL}/about-us`
+        });
+
+        await strapi.plugins['email'].services.email.send({
+            to: result.email,
+            subject: `Investant | Verify Email`,
+            html: emailHTML
+        });
     },
 };

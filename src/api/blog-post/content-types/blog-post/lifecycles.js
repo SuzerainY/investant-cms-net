@@ -25,26 +25,27 @@ module.exports = {
                     const blogTwo = recentPosts[0];
                     const blogThree = recentPosts[1];
 
+                    const InvestantURL = process.env.INVESTANT_FRONT_URL;
                     const emailHTML = blogPostNotification({
                         featureBlogImage: result.SPLASH.formats.medium.url,
                         featureBlogTitle: result.Title,
                         featureBlogAuthor: result.Author,
                         featureBlogDescription: result.BlogPostDescription,
-                        featureBlogURL: `https://investant.net/blog/${result.SLUG}`,
+                        featureBlogURL: `${InvestantURL}/blog/${result.SLUG}`,
                         blogTwoImage: blogTwo.SPLASH.formats.small.url,
                         blogTwoTitle: blogTwo.Title,
                         blogTwoDescription: blogTwo.BlogPostDescription,
-                        blogTwoURL: `https://investant.net/blog/${blogTwo.SLUG}`,
+                        blogTwoURL: `${InvestantURL}/blog/${blogTwo.SLUG}`,
                         blogThreeImage: blogThree.SPLASH.formats.small.url,
                         blogThreeTitle: blogThree.Title,
                         blogThreeDescription: blogThree.BlogPostDescription,
-                        blogThreeURL: `https://investant.net/blog/${blogThree.SLUG}`,
+                        blogThreeURL: `${InvestantURL}/blog/${blogThree.SLUG}`,
                         SenderName: "",
                         SenderAddress: "",
                         SenderCity: "",
                         SenderState: "",
                         SenderZip: "",
-                        unsubscribeLink: "https://investant.net", // Unsubscribe form link
+                        unsubscribeLink: `${InvestantURL}/login`, // Unsubscribe form link
                     });
 
                     // Send the email to each user
