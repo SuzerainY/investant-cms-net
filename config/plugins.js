@@ -17,6 +17,7 @@ module.exports = ({ env }) => ({
     'users-permissions': {
       config: {
         jwtSecret: String(process.env.JWT_SECRET),
+        jwt: { expiresIn: '7d', }, // Here we are defining lifetime for User JWTs
         register: {
           allowedFields: ["firstname", "lastname", "blogPostSubscription"],
         }
