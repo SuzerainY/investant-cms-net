@@ -30,8 +30,8 @@ module.exports = ({ env }) => ({
           apiKey: process.env.INVESTANT_NET_GMAIL_SENDGRID_API_KEY,
         },
         settings: {
-          defaultFrom: 'investant.net@gmail.com',
-          defaultReplyTo: 'investant.net@gmail.com',
+          defaultFrom: 'info@investant.net',
+          defaultReplyTo: 'info@investant.net',
         },
       },
     },

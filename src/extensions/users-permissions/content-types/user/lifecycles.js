@@ -60,7 +60,7 @@ module.exports = {
 
             await strapi.plugins['email'].services.email.send({
                 to: result.email,
-                subject: `Investant | Verify Email`,
+                subject: 'Investant | Verify Email',
                 html: emailHTML
             });
         } catch (error) { console.log(error.message); }

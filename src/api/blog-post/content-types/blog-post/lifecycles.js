@@ -7,7 +7,7 @@ module.exports = {
         if ((result.publishedAt != null && result.publishedAt != undefined) && (params.publishedAt == null || params.publishedAt == undefined)) {
 
             // Check if the post should be sent as an email on publish and hasn't already been sent (was unpublished and now published again)
-            if (result.SendEmailOnPublish === true && result.EmailSent !== true) {
+            if (result.EmailSent !== true && result.SendEmailOnPublish === true) {
                 try {
                     // Retrieve the list of confirmed and subscribed users to notify
                     const users = await strapi.entityService.findMany('plugin::users-permissions.user', {filters: { confirmed: true, blogPostSubscription: true }});
