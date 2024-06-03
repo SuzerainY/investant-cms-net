@@ -52,6 +52,10 @@ module.exports = {
                     for (const user of users) {
                         await strapi.plugins['email'].services.email.send({
                             to: user.email,
+                            from: {
+                                email: "info@investant.net",
+                                name: "Investant Team"
+                            },
                             subject: `Investant | ${result.Title}`,
                             html: emailHTML
                         });
