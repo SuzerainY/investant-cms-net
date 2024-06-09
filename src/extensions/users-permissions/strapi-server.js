@@ -25,7 +25,7 @@ module.exports = (plugin) => {
             if (typeof blogPostSubscription === 'boolean') {updatedUserData.blogPostSubscription = blogPostSubscription;}
 
             // Update the user data in the database
-            const updatedUser = await strapi.query('plugin::users-permissions.user').update({
+            await strapi.query('plugin::users-permissions.user').update({
                 where: { id: ctx.state.user.id },
                 data: updatedUserData
             });
