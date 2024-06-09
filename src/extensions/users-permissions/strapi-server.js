@@ -32,7 +32,7 @@ module.exports = (plugin) => {
             ctx.response.status = 200;
             ctx.send({
                 message: "User updated successfully",
-                user: updatedUser
+                userInfo: updatedUserData
             });
         } catch (error) {
             const errorMessage = error.message;
