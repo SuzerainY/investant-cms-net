@@ -21,7 +21,8 @@ module.exports = (plugin) => {
                 if (userWithSameEmail && (userWithSameEmail.id !== ctx.state.user.id)) {
                     throw new Error("Email already taken");
                 }
-                updatedUserData.email = email;}
+                updatedUserData.email = email;
+            }
             if (typeof blogPostSubscription === 'boolean') {updatedUserData.blogPostSubscription = blogPostSubscription;}
 
             // Update the user data in the database
@@ -45,7 +46,7 @@ module.exports = (plugin) => {
             }
         }
     };
-    // Push our controller as the handler for the content-api route
+    // Push our controller as the handler for new content-api route: /user/me
     plugin.routes['content-api'].routes.push({
         method: "PUT",
         path: "/user/me",

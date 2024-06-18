@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contact_us_submissions",
+  "info": {
+    "singularName": "contact-us-submission",
+    "pluralName": "contact-us-submissions",
+    "displayName": "ContactUsSubmission"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Subject": {
+      "type": "string",
+      "required": true
+    },
+    "Message": {
+      "type": "text",
+      "required": true,
+      "maxLength": 2500
+    },
+    "OpenedAt": {
+      "type": "datetime",
+      "required": true
+    },
+    "FirstResponseAt": {
+      "type": "datetime"
+    },
+    "TicketClosed": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "ContactName": {
+      "type": "string",
+      "maxLength": 20,
+      "required": true
+    },
+    "ContactEmail": {
+      "type": "email",
+      "required": true
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}

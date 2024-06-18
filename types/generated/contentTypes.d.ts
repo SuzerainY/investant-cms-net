@@ -488,6 +488,57 @@ export interface ApiBlogPostCategoryBlogPostCategory
   };
 }
 
+export interface ApiContactUsSubmissionContactUsSubmission
+  extends Schema.CollectionType {
+  collectionName: 'contact_us_submissions';
+  info: {
+    singularName: 'contact-us-submission';
+    pluralName: 'contact-us-submissions';
+    displayName: 'ContactUsSubmission';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    Subject: Attribute.String & Attribute.Required;
+    Message: Attribute.Text &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 2500;
+      }>;
+    OpenedAt: Attribute.DateTime & Attribute.Required;
+    FirstResponseAt: Attribute.DateTime;
+    TicketClosed: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    ContactName: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 20;
+      }>;
+    ContactEmail: Attribute.Email & Attribute.Required;
+    users_permissions_user: Attribute.Relation<
+      'api::contact-us-submission.contact-us-submission',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::contact-us-submission.contact-us-submission',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::contact-us-submission.contact-us-submission',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -818,6 +869,7 @@ declare module '@strapi/types' {
       'api::about-us-page.about-us-page': ApiAboutUsPageAboutUsPage;
       'api::blog-post.blog-post': ApiBlogPostBlogPost;
       'api::blog-post-category.blog-post-category': ApiBlogPostCategoryBlogPostCategory;
+      'api::contact-us-submission.contact-us-submission': ApiContactUsSubmissionContactUsSubmission;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;

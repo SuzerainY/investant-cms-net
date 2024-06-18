@@ -1,6 +1,6 @@
 const newUserEmailVerification = require('../../../../emails/templates/verification/new-user-email-verification.js');
 
-// Return a Date() object as 'February 30, 2023'
+// Return a Date as String: 'February 30, 2023'
 const formatDate = (date) => {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const year = date.getUTCFullYear();
@@ -8,7 +8,7 @@ const formatDate = (date) => {
     const day = date.getUTCDate();
     
     return `${month} ${day}, ${year}`;
-}
+};
 
 module.exports = {
     async afterCreate({ result }) {
