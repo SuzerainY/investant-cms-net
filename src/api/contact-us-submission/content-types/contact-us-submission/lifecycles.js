@@ -1,4 +1,5 @@
 const userContactUsFormSubmissionNotification = require('../../../../emails/templates/notification/user-contact-us-form-submission-notification.js');
+const strapiURL = process.env.INVESTANT_ADMIN_URL;
 
 // Return a String as '11:52 AM on February 30, 2023'
 const formatDate = (date) => {
@@ -31,7 +32,7 @@ module.exports = {
             
             const emailHTML = userContactUsFormSubmissionNotification({
                 submissionID: result.id,
-                submissionAdminLink: `https://admin.investant.net/admin/content-manager/collectionType/api::contact-us-submission.contact-us-submission/${result.id}`,
+                submissionAdminLink: `${strapiURL}/admin/content-manager/collectionType/api::contact-us-submission.contact-us-submission/${result.id}`,
                 contactName: result.ContactName,
                 contactEmail: result.ContactEmail,
                 openedAt: formatDate(new Date(result.OpenedAt)),

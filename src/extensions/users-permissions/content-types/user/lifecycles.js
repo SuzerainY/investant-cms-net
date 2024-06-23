@@ -1,4 +1,5 @@
 const newUserEmailVerification = require('../../../../emails/templates/verification/new-user-email-verification.js');
+const investantURL = process.env.INVESTANT_FRONT_URL;
 
 // Return a Date as String: 'February 30, 2023'
 const formatDate = (date) => {
@@ -29,8 +30,7 @@ module.exports = {
             }
 
             // Generate the user's email verification link to our front-end 'verify-email' API
-            const InvestantURL = process.env.INVESTANT_FRONT_URL;
-            const confirmationUrl = `${InvestantURL}/api/verify-email?confirmationToken=${result.confirmationToken}`;
+            const confirmationUrl = `${investantURL}/api/verify-email?confirmationToken=${result.confirmationToken}`;
 
             // Fetch the two most recent published blog posts for display in the email
             const recentPosts = await strapi.entityService.findMany('api::blog-post.blog-post', {
@@ -49,13 +49,13 @@ module.exports = {
                 blogTwoTitle: blogTwo.Title,
                 blogTwoDescription: blogTwo.BlogPostDescription,
                 blogTwoDate: formatDate(new Date(blogTwo.PublishDate)),
-                blogTwoURL: `${InvestantURL}/blog/${blogTwo.SLUG}`,
+                blogTwoURL: `${investantURL}/blog/${blogTwo.SLUG}`,
                 blogThreeImage: blogThree.SPLASH.formats.small.url,
                 blogThreeTitle: blogThree.Title,
                 blogThreeDescription: blogThree.BlogPostDescription,
                 blogThreeDate: formatDate(new Date(blogThree.PublishDate)),
-                blogThreeURL: `${InvestantURL}/blog/${blogThree.SLUG}`,
-                aboutUsURL: `${InvestantURL}/about-us`
+                blogThreeURL: `${investantURL}/blog/${blogThree.SLUG}`,
+                aboutUsURL: `${investantURL}/about-us`
             });
 
             await strapi.plugins['email'].services.email.send({
