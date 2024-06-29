@@ -41,7 +41,7 @@ module.exports = {
             });
 
             await strapi.plugins['email'].services.email.send({
-                to: ['ryan@investant.net', 'haven@investant.net'],
+                to: 'investant-executives@investant.net',
                 subject: 'Investant | User Contact Us Submission',
                 html: emailHTML
             });
