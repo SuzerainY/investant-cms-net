@@ -16,26 +16,6 @@ const formatDate = (date) => {
     return `${hour}:${minute} ${ampm} on ${month} ${day}, ${year} Eastern`;
 };
 
-// Convert UTC date to Eastern Time. Eastern Standard Time (EST) is UTC-5. Eastern Daylight Time (EDT) is UTC-4
-const convertUTCtoEastern = (date) => {
-    // Get the offset in minutes
-    const offset = date.getTimezoneOffset(); // in minutes
-    const utcOffset = -offset / 60; // convert to hours
-
-    let estOffset = -5;
-    // Check if Daylight Saving Time is in effect
-    const isDST = (date) => {
-        const jan = new Date(date.getFullYear(), 0, 1).getTimezoneOffset();
-        const jul = new Date(date.getFullYear(), 6, 1).getTimezoneOffset();
-        return Math.max(jan, jul) !== date.getTimezoneOffset();
-    };
-    if (isDST(date)) {estOffset = -4;}
-
-    // Calculate the time difference in milliseconds
-    const timeDifference = (estOffset - utcOffset) * 60 * 60 * 1000;
-    return new Date(date.getTime() + timeDifference);
-};
-
 module.exports = {
     async afterCreate({ result }) {
         try {
@@ -49,7 +29,7 @@ module.exports = {
 
             // Add HTML for new line characters to the message
             let parsedMessage = result.Message.replace(/\r\n/g, '<br>').replace(/\n/g, '<br>');
-            let openedAtEastern = convertUTCtoEastern(new Date(result.OpenedAt));
+            let openedAtEastern = new Date(result.OpenedAt.toLocaleString("en-US", { timeZone: "America/New_York" }));
             
             const emailHTML = userContactUsFormSubmissionNotification({
                 submissionID: result.id,
