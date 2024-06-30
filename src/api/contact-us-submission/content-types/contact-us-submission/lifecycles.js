@@ -34,7 +34,7 @@ module.exports = {
             // Set time to Eastern
             let openedAtEastern = convertUTCtoEastern(result.OpenedAt);
             await strapi.entityService.update('api::contact-us-submission.contact-us-submission', result.id, {
-                data: {OpenedAt: openedAtEastern}
+                data: {OpenedAt: openedAtEastern.toDateString()}
             });
 
             // Check if the ContactEmail matches an existing user and add relation if so
