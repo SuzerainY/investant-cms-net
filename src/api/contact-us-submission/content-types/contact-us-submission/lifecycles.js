@@ -16,9 +16,28 @@ const formatDate = (date) => {
     return `${hour}:${minute} ${ampm} on ${month} ${day}, ${year} Eastern`;
 };
 
+// Convert UTC to Eastern Time
+const convertUTCtoEastern = (utcDate) => {
+    // Create a new date object from UTC date
+    let date = new Date(utcDate);
+    const isEDT = () => {
+        const month = date.getMonth() + 1;
+        return month >= 3 && month <= 11; // Months 3 to 11 are EDT (March to November)
+    };
+    const easternOffset = isEDT() ? -4 : -5;
+    date.setHours(date.getHours() + (easternOffset - date.getTimezoneOffset() / 60));
+    return date;
+};
+
 module.exports = {
     async afterCreate({ result }) {
         try {
+            // Set time to Eastern
+            let openedAtEastern = convertUTCtoEastern(result.OpenedAt);
+            await strapi.entityService.update('api::contact-us-submission.contact-us-submission', result.id, {
+                data: {OpenedAt: openedAtEastern}
+            });
+
             // Check if the ContactEmail matches an existing user and add relation if so
             const matchingUser = await strapi.query('plugin::users-permissions.user').findOne({where: { email: result.ContactEmail }});
             if (matchingUser) {
@@ -29,7 +48,6 @@ module.exports = {
 
             // Add HTML for new line characters to the message
             let parsedMessage = result.Message.replace(/\r\n/g, '<br>').replace(/\n/g, '<br>');
-            let openedAtEastern = new Date(result.OpenedAt.toLocaleString("en-US", { timeZone: "America/New_York" }));
             
             const emailHTML = userContactUsFormSubmissionNotification({
                 submissionID: result.id,
