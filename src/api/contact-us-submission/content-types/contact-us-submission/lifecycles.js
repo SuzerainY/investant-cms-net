@@ -18,7 +18,6 @@ const formatDate = (date) => {
 
 // Convert UTC to Eastern Time
 const convertUTCtoEastern = (utcDate) => {
-    // Create a new date object from UTC date
     let date = new Date(utcDate);
     const isEDT = () => {
         const month = date.getMonth() + 1;
@@ -33,7 +32,7 @@ module.exports = {
     async afterCreate({ result }) {
         try {
             // Set time to Eastern
-            let openedAtEastern = convertUTCtoEastern(result.OpenedAt);
+            let openedAtEastern = convertUTCtoEastern(result.OpenedAt).toISOString();
             await strapi.entityService.update('api::contact-us-submission.contact-us-submission', result.id, {
                 data: {OpenedAt: openedAtEastern}
             });
@@ -48,7 +47,7 @@ module.exports = {
 
             // Add HTML for new line characters to the message
             let parsedMessage = result.Message.replace(/\r\n/g, '<br>').replace(/\n/g, '<br>');
-            
+
             const emailHTML = userContactUsFormSubmissionNotification({
                 submissionID: result.id,
                 submissionAdminLink: `${strapiURL}/admin/content-manager/collectionType/api::contact-us-submission.contact-us-submission/${result.id}`,
