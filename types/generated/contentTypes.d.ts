@@ -856,6 +856,41 @@ export interface ApiContactUsSubmissionContactUsSubmission
   };
 }
 
+export interface ApiWebAlertBannerWebAlertBanner extends Schema.SingleType {
+  collectionName: 'web_alert_banners';
+  info: {
+    singularName: 'web-alert-banner';
+    pluralName: 'web-alert-banners';
+    displayName: 'WebAlertBanner';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    FullMessage: Attribute.String & Attribute.Required;
+    LinkedPortion: Attribute.String;
+    LinkURL: Attribute.String;
+    ShowAlertBanner: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::web-alert-banner.web-alert-banner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::web-alert-banner.web-alert-banner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -876,6 +911,7 @@ declare module '@strapi/types' {
       'api::blog-post.blog-post': ApiBlogPostBlogPost;
       'api::blog-post-category.blog-post-category': ApiBlogPostCategoryBlogPostCategory;
       'api::contact-us-submission.contact-us-submission': ApiContactUsSubmissionContactUsSubmission;
+      'api::web-alert-banner.web-alert-banner': ApiWebAlertBannerWebAlertBanner;
     }
   }
 }
