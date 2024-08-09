@@ -699,6 +699,7 @@ export interface ApiAboutUsPageAboutUsPage extends Schema.SingleType {
       Attribute.DefaultTo<'About Ryan...'>;
     HavenProfilePicture: Attribute.Media & Attribute.Required;
     RyanProfilePicture: Attribute.Media & Attribute.Required;
+    CompanyDescription: Attribute.Text & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

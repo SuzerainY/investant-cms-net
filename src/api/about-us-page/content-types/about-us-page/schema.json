@@ -37,6 +37,10 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "CompanyDescription": {
+      "type": "text",
+      "required": true
     }
   }
 }
