@@ -1,4 +1,5 @@
 const blogPostNotification = require('../../../../emails/templates/notification/blog-post-notification.js');
+const InvestantURL = process.env.INVESTANT_FRONT_URL;
 
 module.exports = {
     async afterUpdate({ result, params }) {
@@ -25,27 +26,26 @@ module.exports = {
                     const blogTwo = recentPosts[0];
                     const blogThree = recentPosts[1];
 
-                    const InvestantURL = process.env.INVESTANT_FRONT_URL;
                     const emailHTML = blogPostNotification({
-                        featureBlogImage: result.SPLASH.formats.medium.url,
+                        featureBlogImage: result.SPLASH.url,
                         featureBlogTitle: result.Title,
                         featureBlogAuthor: result.Author,
                         featureBlogDescription: result.BlogPostDescription,
                         featureBlogURL: `${InvestantURL}/blog/${result.SLUG}`,
-                        blogTwoImage: blogTwo.SPLASH.formats.small.url,
+                        blogTwoImage: blogTwo.SPLASH.url,
                         blogTwoTitle: blogTwo.Title,
                         blogTwoDescription: blogTwo.BlogPostDescription,
                         blogTwoURL: `${InvestantURL}/blog/${blogTwo.SLUG}`,
-                        blogThreeImage: blogThree.SPLASH.formats.small.url,
+                        blogThreeImage: blogThree.SPLASH.url,
                         blogThreeTitle: blogThree.Title,
                         blogThreeDescription: blogThree.BlogPostDescription,
                         blogThreeURL: `${InvestantURL}/blog/${blogThree.SLUG}`,
-                        SenderName: "",
+                        SenderName: "Investant",
                         SenderAddress: "",
                         SenderCity: "",
                         SenderState: "",
                         SenderZip: "",
-                        unsubscribeLink: `${InvestantURL}/login`, // Unsubscribe form link
+                        unsubscribeLink: `${InvestantURL}/account?block=subscriptions`, // Unsubscribe form link
                     });
 
                     // Send the email to each user
