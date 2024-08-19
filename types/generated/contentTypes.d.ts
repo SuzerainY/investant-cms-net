@@ -362,219 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiAboutUsPageAboutUsPage extends Schema.SingleType {
-  collectionName: 'about_us_pages';
-  info: {
-    singularName: 'about-us-page';
-    pluralName: 'about-us-pages';
-    displayName: 'AboutUsPage';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    HavenDescription: Attribute.RichText &
-      Attribute.Required &
-      Attribute.DefaultTo<'About Haven...'>;
-    RyanDescription: Attribute.RichText &
-      Attribute.Required &
-      Attribute.DefaultTo<'About Ryan...'>;
-    HavenProfilePicture: Attribute.Media & Attribute.Required;
-    RyanProfilePicture: Attribute.Media & Attribute.Required;
-    CompanyDescription: Attribute.Text & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::about-us-page.about-us-page',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::about-us-page.about-us-page',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiBlogPostBlogPost extends Schema.CollectionType {
-  collectionName: 'blog_posts';
-  info: {
-    singularName: 'blog-post';
-    pluralName: 'blog-posts';
-    displayName: 'BlogPost';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Title: Attribute.String & Attribute.Required & Attribute.Unique;
-    BlogPostBody: Attribute.RichText & Attribute.Required;
-    BlogPostDescription: Attribute.Text &
-      Attribute.Required &
-      Attribute.DefaultTo<'An Investant Commentary'>;
-    SLUG: Attribute.String & Attribute.Required & Attribute.Unique;
-    SPLASH: Attribute.Media & Attribute.Required;
-    Author: Attribute.String &
-      Attribute.Required &
-      Attribute.DefaultTo<'Investant'>;
-    PublishDate: Attribute.Date & Attribute.Required;
-    blog_post_categories: Attribute.Relation<
-      'api::blog-post.blog-post',
-      'manyToMany',
-      'api::blog-post-category.blog-post-category'
-    >;
-    SendEmailOnPublish: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<false>;
-    EmailSent: Attribute.Boolean &
-      Attribute.Private &
-      Attribute.DefaultTo<false>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::blog-post.blog-post',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::blog-post.blog-post',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiBlogPostCategoryBlogPostCategory
-  extends Schema.CollectionType {
-  collectionName: 'blog_post_categories';
-  info: {
-    singularName: 'blog-post-category';
-    pluralName: 'blog-post-categories';
-    displayName: 'BlogPostCategory';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    CategoryName: Attribute.String & Attribute.Required;
-    BlogPosts: Attribute.Relation<
-      'api::blog-post-category.blog-post-category',
-      'manyToMany',
-      'api::blog-post.blog-post'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::blog-post-category.blog-post-category',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::blog-post-category.blog-post-category',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiContactUsSubmissionContactUsSubmission
-  extends Schema.CollectionType {
-  collectionName: 'contact_us_submissions';
-  info: {
-    singularName: 'contact-us-submission';
-    pluralName: 'contact-us-submissions';
-    displayName: 'ContactUsSubmission';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  attributes: {
-    Subject: Attribute.String & Attribute.Required;
-    Message: Attribute.Text &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 2500;
-      }>;
-    OpenedAt: Attribute.DateTime & Attribute.Required;
-    FirstResponseAt: Attribute.DateTime;
-    TicketClosed: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<false>;
-    ContactName: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 20;
-      }>;
-    ContactEmail: Attribute.Email & Attribute.Required;
-    users_permissions_user: Attribute.Relation<
-      'api::contact-us-submission.contact-us-submission',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::contact-us-submission.contact-us-submission',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::contact-us-submission.contact-us-submission',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiWebAlertBannerWebAlertBanner extends Schema.SingleType {
-  collectionName: 'web_alert_banners';
-  info: {
-    singularName: 'web-alert-banner';
-    pluralName: 'web-alert-banners';
-    displayName: 'WebAlertBanner';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    FullMessage: Attribute.String & Attribute.Required;
-    LinkedPortion: Attribute.String;
-    LinkURL: Attribute.String;
-    ShowAlertBanner: Attribute.Boolean &
-      Attribute.Required &
-      Attribute.DefaultTo<true>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::web-alert-banner.web-alert-banner',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::web-alert-banner.web-alert-banner',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -892,6 +679,250 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiAboutUsPageAboutUsPage extends Schema.SingleType {
+  collectionName: 'about_us_pages';
+  info: {
+    singularName: 'about-us-page';
+    pluralName: 'about-us-pages';
+    displayName: 'AboutUsPage';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    HavenDescription: Attribute.RichText &
+      Attribute.Required &
+      Attribute.DefaultTo<'About Haven...'>;
+    RyanDescription: Attribute.RichText &
+      Attribute.Required &
+      Attribute.DefaultTo<'About Ryan...'>;
+    HavenProfilePicture: Attribute.Media & Attribute.Required;
+    RyanProfilePicture: Attribute.Media & Attribute.Required;
+    CompanyDescription: Attribute.Text & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::about-us-page.about-us-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::about-us-page.about-us-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiBlogPostBlogPost extends Schema.CollectionType {
+  collectionName: 'blog_posts';
+  info: {
+    singularName: 'blog-post';
+    pluralName: 'blog-posts';
+    displayName: 'BlogPost';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Title: Attribute.String & Attribute.Required & Attribute.Unique;
+    BlogPostBody: Attribute.RichText & Attribute.Required;
+    BlogPostDescription: Attribute.Text &
+      Attribute.Required &
+      Attribute.DefaultTo<'An Investant Commentary'>;
+    SLUG: Attribute.String & Attribute.Required & Attribute.Unique;
+    SPLASH: Attribute.Media & Attribute.Required;
+    Author: Attribute.String &
+      Attribute.Required &
+      Attribute.DefaultTo<'Investant'>;
+    PublishDate: Attribute.Date & Attribute.Required;
+    blog_post_categories: Attribute.Relation<
+      'api::blog-post.blog-post',
+      'manyToMany',
+      'api::blog-post-category.blog-post-category'
+    >;
+    SendEmailOnPublish: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    EmailSent: Attribute.Boolean &
+      Attribute.Private &
+      Attribute.DefaultTo<false>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::blog-post.blog-post',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::blog-post.blog-post',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiBlogPostCategoryBlogPostCategory
+  extends Schema.CollectionType {
+  collectionName: 'blog_post_categories';
+  info: {
+    singularName: 'blog-post-category';
+    pluralName: 'blog-post-categories';
+    displayName: 'BlogPostCategory';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    CategoryName: Attribute.String & Attribute.Required;
+    BlogPosts: Attribute.Relation<
+      'api::blog-post-category.blog-post-category',
+      'manyToMany',
+      'api::blog-post.blog-post'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::blog-post-category.blog-post-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::blog-post-category.blog-post-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiContactUsSubmissionContactUsSubmission
+  extends Schema.CollectionType {
+  collectionName: 'contact_us_submissions';
+  info: {
+    singularName: 'contact-us-submission';
+    pluralName: 'contact-us-submissions';
+    displayName: 'ContactUsSubmission';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    Subject: Attribute.String & Attribute.Required;
+    Message: Attribute.Text &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 2500;
+      }>;
+    OpenedAt: Attribute.DateTime & Attribute.Required;
+    FirstResponseAt: Attribute.DateTime;
+    TicketClosed: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    ContactName: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 20;
+      }>;
+    ContactEmail: Attribute.Email & Attribute.Required;
+    users_permissions_user: Attribute.Relation<
+      'api::contact-us-submission.contact-us-submission',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::contact-us-submission.contact-us-submission',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::contact-us-submission.contact-us-submission',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPublicBlogSubscriberPublicBlogSubscriber
+  extends Schema.CollectionType {
+  collectionName: 'public_blog_subscribers';
+  info: {
+    singularName: 'public-blog-subscriber';
+    pluralName: 'public-blog-subscribers';
+    displayName: 'PublicBlogSubscriber';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    Email: Attribute.Email & Attribute.Required & Attribute.Unique;
+    DateSubscribed: Attribute.Date & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::public-blog-subscriber.public-blog-subscriber',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::public-blog-subscriber.public-blog-subscriber',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiWebAlertBannerWebAlertBanner extends Schema.SingleType {
+  collectionName: 'web_alert_banners';
+  info: {
+    singularName: 'web-alert-banner';
+    pluralName: 'web-alert-banners';
+    displayName: 'WebAlertBanner';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    FullMessage: Attribute.String & Attribute.Required;
+    LinkedPortion: Attribute.String;
+    LinkURL: Attribute.String;
+    ShowAlertBanner: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<true>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::web-alert-banner.web-alert-banner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::web-alert-banner.web-alert-banner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -902,17 +933,18 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::about-us-page.about-us-page': ApiAboutUsPageAboutUsPage;
-      'api::blog-post.blog-post': ApiBlogPostBlogPost;
-      'api::blog-post-category.blog-post-category': ApiBlogPostCategoryBlogPostCategory;
-      'api::contact-us-submission.contact-us-submission': ApiContactUsSubmissionContactUsSubmission;
-      'api::web-alert-banner.web-alert-banner': ApiWebAlertBannerWebAlertBanner;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::about-us-page.about-us-page': ApiAboutUsPageAboutUsPage;
+      'api::blog-post.blog-post': ApiBlogPostBlogPost;
+      'api::blog-post-category.blog-post-category': ApiBlogPostCategoryBlogPostCategory;
+      'api::contact-us-submission.contact-us-submission': ApiContactUsSubmissionContactUsSubmission;
+      'api::public-blog-subscriber.public-blog-subscriber': ApiPublicBlogSubscriberPublicBlogSubscriber;
+      'api::web-alert-banner.web-alert-banner': ApiWebAlertBannerWebAlertBanner;
     }
   }
 }

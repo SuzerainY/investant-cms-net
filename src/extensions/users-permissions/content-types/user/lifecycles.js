@@ -29,6 +29,18 @@ module.exports = {
                 });
             }
 
+            // Find and delete any PublicBlogSubscriber with the same email
+            const publicSubscribers = await strapi.entityService.findMany('api::public-blog-subscriber.public-blog-subscriber', {
+                filters: { Email: result.email }
+            });
+
+            if (publicSubscribers.length > 0) {
+                for (const subscriber of publicSubscribers) {
+                    await strapi.entityService.delete('api::public-blog-subscriber.public-blog-subscriber', subscriber.id);
+                    console.log(`Deleted PublicBlogSubscriber with id ${subscriber.id} for new user ${result.email}`);
+                }
+            }
+
             // Generate the user's email verification link to our front-end 'verify-email' API
             const confirmationUrl = `${investantURL}/api/verify-email?confirmationToken=${result.confirmationToken}`;
 
