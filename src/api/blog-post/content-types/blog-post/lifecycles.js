@@ -68,7 +68,7 @@ module.exports = {
                         SenderCity: "",
                         SenderState: "",
                         SenderZip: "",
-                        unsubscribeLink: `${InvestantURL}/account?block=subscriptions`, // Unsubscribe form link for public subscribers
+                        unsubscribeLink: `${InvestantURL}/unsubscribe-blog`, // Unsubscribe form link for public subscribers
                     });
 
                     // Send the email to each user account

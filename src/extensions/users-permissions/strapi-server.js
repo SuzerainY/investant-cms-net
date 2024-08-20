@@ -2,9 +2,9 @@ module.exports = (plugin) => {
 
     // Controller extension for the PUT method on /user/me route of users-permissions plugin content-api
     plugin.controllers.user.updateMe = async (ctx) => {
-        if (!ctx.state.user || !ctx.state.user.id) {return ctx.unauthorized();}
-
         try {
+            if (!ctx.state.user || !ctx.state.user.id) {return ctx.unauthorized();}
+
             // Extract only the fields that need to be updated from the request body
             const { username, email, blogPostSubscription } = ctx.request.body;
 
@@ -67,9 +67,10 @@ module.exports = (plugin) => {
             return sanitize.contentAPI.output(user, schema, { auth });
         };
         
-        if (!ctx.state.user || !ctx.state.user.id) {return ctx.unauthorized();}
-
+        
         try {
+            if (!ctx.state.user || !ctx.state.user.id) {return ctx.unauthorized();}
+            
             // Get the authenticated user ID
             const userId = ctx.state.user.id;
 
