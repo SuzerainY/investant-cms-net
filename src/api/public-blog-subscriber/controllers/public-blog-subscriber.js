@@ -6,6 +6,27 @@ const { createCoreController } = require('@strapi/strapi').factories;
 module.exports = createCoreController(
     'api::public-blog-subscriber.public-blog-subscriber',
     ({ strapi }) => ({
+        async create(ctx) {
+            // @ts-ignore
+            const { Email } = ctx.request.body;
+            // Find any PublicBlogSubscriber with the same email and return that user is already subscribed
+            const publicSubscribers = await strapi.entityService.findMany('api::public-blog-subscriber.public-blog-subscriber', {
+                filters: { Email: Email }
+            });
+
+            if (publicSubscribers.length > 0) {
+                ctx.response.status = 200;
+                ctx.send({
+                    message: 'Email Is Already A Subscriber',
+                    email: Email
+                });
+                return;
+            }
+
+            const response = await super.create(ctx);
+            return response;
+        },
+
         async unsubscribe(ctx) {
             try {
                 // We should receive a DELETE request with a body containing the user email
