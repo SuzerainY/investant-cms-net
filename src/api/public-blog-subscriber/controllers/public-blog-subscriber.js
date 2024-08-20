@@ -15,7 +15,7 @@ module.exports = createCoreController(
             });
 
             if (publicSubscribers.length > 0) {
-                ctx.response.status = 200;
+                ctx.response.status = 409;
                 ctx.send({
                     message: 'Email Is Already A Subscriber',
                     email: Email
