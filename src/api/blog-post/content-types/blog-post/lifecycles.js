@@ -7,6 +7,10 @@ module.exports = {
         // Check if the post itself has just been published (not an edit to a parameter of the post)
         if ((result.publishedAt != null && result.publishedAt != undefined) && (params.publishedAt == null || params.publishedAt == undefined)) {
 
+            // Replace any spaces with hyphens in the SLUG
+            let newSLUG = result.SLUG.replace(' ', '-');
+            if (newSLUG !== result.SLUG) {strapi.entityService.update('api::blog-post.blog-post', result.id, { data: { SLUG: newSLUG } });}
+
             // Check if the post should be sent as an email on publish and hasn't already been sent (was unpublished and now published again)
             if (result.EmailSent !== true && result.SendEmailOnPublish === true) {
                 try {
@@ -32,7 +36,7 @@ module.exports = {
                         featureBlogTitle: result.Title,
                         featureBlogAuthor: result.Author,
                         featureBlogDescription: result.BlogPostDescription,
-                        featureBlogURL: `${InvestantURL}/blog/${result.SLUG}`,
+                        featureBlogURL: `${InvestantURL}/blog/${newSLUG !== result.SLUG ? newSLUG : result.SLUG}`,
                         blogTwoImage: blogTwo.SPLASH.url,
                         blogTwoTitle: blogTwo.Title,
                         blogTwoDescription: blogTwo.BlogPostDescription,
@@ -54,7 +58,7 @@ module.exports = {
                         featureBlogTitle: result.Title,
                         featureBlogAuthor: result.Author,
                         featureBlogDescription: result.BlogPostDescription,
-                        featureBlogURL: `${InvestantURL}/blog/${result.SLUG}`,
+                        featureBlogURL: `${InvestantURL}/blog/${newSLUG !== result.SLUG ? newSLUG : result.SLUG}`,
                         blogTwoImage: blogTwo.SPLASH.url,
                         blogTwoTitle: blogTwo.Title,
                         blogTwoDescription: blogTwo.BlogPostDescription,
