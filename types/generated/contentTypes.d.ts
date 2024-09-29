@@ -857,6 +857,40 @@ export interface ApiContactUsSubmissionContactUsSubmission
   };
 }
 
+export interface ApiHomePageHeroHomePageHero extends Schema.SingleType {
+  collectionName: 'home_page_heroes';
+  info: {
+    singularName: 'home-page-hero';
+    pluralName: 'home-page-heroes';
+    displayName: 'HomePageHero';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    TopLine: Attribute.String & Attribute.DefaultTo<'Short stories about'>;
+    BottomLine: Attribute.String &
+      Attribute.DefaultTo<'wealth, behavior, and life'>;
+    Subtext: Attribute.String &
+      Attribute.DefaultTo<'Subscribe to our newsletter'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::home-page-hero.home-page-hero',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::home-page-hero.home-page-hero',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPublicBlogSubscriberPublicBlogSubscriber
   extends Schema.CollectionType {
   collectionName: 'public_blog_subscribers';
@@ -943,6 +977,7 @@ declare module '@strapi/types' {
       'api::blog-post.blog-post': ApiBlogPostBlogPost;
       'api::blog-post-category.blog-post-category': ApiBlogPostCategoryBlogPostCategory;
       'api::contact-us-submission.contact-us-submission': ApiContactUsSubmissionContactUsSubmission;
+      'api::home-page-hero.home-page-hero': ApiHomePageHeroHomePageHero;
       'api::public-blog-subscriber.public-blog-subscriber': ApiPublicBlogSubscriberPublicBlogSubscriber;
       'api::web-alert-banner.web-alert-banner': ApiWebAlertBannerWebAlertBanner;
     }

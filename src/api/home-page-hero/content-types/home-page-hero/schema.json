@@ -1,0 +1,27 @@
+{
+  "kind": "singleType",
+  "collectionName": "home_page_heroes",
+  "info": {
+    "singularName": "home-page-hero",
+    "pluralName": "home-page-heroes",
+    "displayName": "HomePageHero"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "TopLine": {
+      "type": "string",
+      "default": "Short stories about"
+    },
+    "BottomLine": {
+      "type": "string",
+      "default": "wealth, behavior, and life"
+    },
+    "Subtext": {
+      "type": "string",
+      "default": "Subscribe to our newsletter"
+    }
+  }
+}
